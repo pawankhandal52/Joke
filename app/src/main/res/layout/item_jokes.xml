@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.unlimit.jokes.presentation.jokesscreen.viewmodel.MainActivityVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvJoke"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="new jokes is this"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mtvJoke"
+            android:textColor="@color/lightBlack"
+            android:textSize="12sp"
+            tools:text="adasdad"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--<com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="@dimen/_8dp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/_8dp">
+
+
+    </com.google.android.material.card.MaterialCardView>-->
+</layout>
