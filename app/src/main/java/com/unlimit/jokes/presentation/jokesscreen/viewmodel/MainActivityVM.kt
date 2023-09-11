@@ -30,12 +30,14 @@ class MainActivityVM(
 
     private fun loadUpdatedData() {
         viewModelScope.launch {
-             _uiState.value = State.Loading
             getTopTenJokesUseCase.getTopTenJokes(10)
                 .collect {
-                    _uiState.value = State.ShowJokes(listOfJokes = it.map {
-                        JokeItem.mapToJokeItem(it)
-                    })
+                    if(it.isNotEmpty()){
+                        _uiState.value = State.ShowJokes(listOfJokes = it.map {
+                            JokeItem.mapToJokeItem(it)
+                        })
+                    }
+
                 }
         }
     }
@@ -43,7 +45,6 @@ class MainActivityVM(
     fun startPeriodicDataFetching() {
         scope.launch {
             while (isActivityInForeground) {
-                Log.d("Api Call", "count")
                 getJokeFromApiAndStoreInDbUseCase.getJokesAndSaveInDb("json")
                 delay(60_000) // Delay for 1 minute
             }

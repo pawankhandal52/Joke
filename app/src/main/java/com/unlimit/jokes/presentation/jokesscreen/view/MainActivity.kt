@@ -62,7 +62,6 @@ class MainActivity : AppCompatActivity() {
 
                         is MainActivityVM.State.ShowJokes -> {
                             binding.progressBar.toGone()
-                            binding.rvJokesList.toVisible()
                             (binding.rvJokesList.adapter as JokeListAdapter).submitList(it.listOfJokes)
                             lifecycleScope.launch {
                                 delay(1000)
@@ -78,7 +77,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     private fun disconnected() {
         binding.clErrorLayout.toVisible()
     }
@@ -86,7 +84,6 @@ class MainActivity : AppCompatActivity() {
     private fun connected() {
         binding.clErrorLayout.toGone()
         mainActivityVM.startPeriodicDataFetching()
-
     }
 
 
@@ -108,13 +105,6 @@ class MainActivity : AppCompatActivity() {
         with(binding.rvJokesList) {
             adapter = jokeListAdapter
         }
-
-        /*val borderColor = ContextCompat.getColor(this, R.color.black)
-
-        val borderWidth =
-            resources.getDimensionPixelSize(R.dimen._1dp)
-        val bottomBorderDecoration = BottomBorderDecoration(borderColor, borderWidth)
-        binding.rvJokesList.addItemDecoration(bottomBorderDecoration)*/
     }
 
 

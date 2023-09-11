@@ -69,7 +69,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvJokesList"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingHorizontal="@dimen/_10dp"
@@ -83,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/_20dp"
+                android:indeterminate="true"
                 app:indicatorColor="@color/black"
                 app:indicatorDirectionCircular="clockwise"
                 app:trackColor="@color/lightBlack" />
