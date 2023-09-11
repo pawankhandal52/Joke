@@ -61,10 +61,21 @@
             android:id="@+id/flData"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mtvTitle"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mtvTitle">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvJokesList"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="@dimen/_10dp"
+                android:paddingVertical="@dimen/_10dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_jokes" />
 
             <com.google.android.material.progressindicator.CircularProgressIndicator
                 android:id="@+id/progressBar"
@@ -72,22 +83,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/_20dp"
+                app:indicatorColor="@color/black"
                 app:indicatorDirectionCircular="clockwise"
-                app:trackColor="@color/lightBlack"
-                app:indicatorColor="@color/black"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvJokesList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingVertical="@dimen/_10dp"
-                android:paddingHorizontal="@dimen/_10dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_jokes" />
+                app:trackColor="@color/lightBlack" />
 
         </FrameLayout>
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,6 +30,7 @@ class MainActivityVM(
 
     private fun loadUpdatedData() {
         viewModelScope.launch {
+             _uiState.value = State.Loading
             getTopTenJokesUseCase.getTopTenJokes(10)
                 .collect {
                     _uiState.value = State.ShowJokes(listOfJokes = it.map {

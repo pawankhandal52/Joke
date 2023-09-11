@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         setupRecyclerView()
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 mainActivityVM.uiState.collectLatest {
                     when (it) {
                         is MainActivityVM.State.Error -> {
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
                         is MainActivityVM.State.ShowJokes -> {
                             binding.progressBar.toGone()
-                            Log.d("List of jokes", it.listOfJokes.toString())
+                            binding.rvJokesList.toVisible()
                             (binding.rvJokesList.adapter as JokeListAdapter).submitList(it.listOfJokes)
                             lifecycleScope.launch {
                                 delay(1000)

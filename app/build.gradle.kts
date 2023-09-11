@@ -8,6 +8,20 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("joke.jks")
+            storePassword = "PSstd#15"
+            keyPassword = "PSstd#15"
+            keyAlias = "key0"
+        }
+        create("release") {
+            storeFile = file("joke.jks")
+            storePassword = "PSstd#15"
+            keyAlias = "key0"
+            keyPassword = "PSstd#15"
+        }
+    }
     namespace = "com.unlimit.jokes"
     compileSdk = 33
 
@@ -23,11 +37,14 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
+            isDebuggable = false
         }
     }
     compileOptions {
@@ -52,7 +69,6 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-    implementation("androidx.paging:paging-runtime:3.2.0")
     implementation ("androidx.room:room-ktx:2.5.2")
     ksp ("androidx.room:room-compiler:2.5.2")
 
@@ -60,7 +76,6 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
 
-    debugImplementation ("com.squareup.leakcanary:leakcanary-android:2.12")
     implementation ("io.insert-koin:koin-android:3.4.3")
 
 
