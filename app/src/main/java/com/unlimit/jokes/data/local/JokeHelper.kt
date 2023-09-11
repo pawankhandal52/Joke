@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface JokeHelper {
     suspend fun insertJoke(joke: Joke)
-    suspend fun getJokes(noOfJokes:Int):Flow<List<Joke>>
+    suspend fun getJokes(noOfJokes: Int): Flow<List<Joke>>
 }

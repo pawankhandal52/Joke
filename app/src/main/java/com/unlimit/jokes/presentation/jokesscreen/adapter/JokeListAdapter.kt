@@ -7,10 +7,12 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.unlimit.jokes.data.local.entity.Joke
 import com.unlimit.jokes.databinding.ItemJokesBinding
+import com.unlimit.jokes.presentation.jokesscreen.utils.formatTimestamp
 
-class JokeListAdapter(private val lifecycleOwner: LifecycleOwner):
-    ListAdapter<JokeItem,JokeVH>(JokeItemDiffUtils) {
+class JokeListAdapter(private val lifecycleOwner: LifecycleOwner) :
+    ListAdapter<JokeItem, JokeVH>(JokeItemDiffUtils) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JokeVH {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemJokesBinding.inflate(inflater, parent, false)
@@ -25,12 +27,14 @@ class JokeListAdapter(private val lifecycleOwner: LifecycleOwner):
             holder.bind(it)
         }
     }
+
 }
 
-class JokeVH(private val binding:ItemJokesBinding,
-             private val lifecycleOwner: LifecycleOwner
-): RecyclerView.ViewHolder(binding.root){
-    fun bind(jokeItem: JokeItem){
+class JokeVH(
+    private val binding: ItemJokesBinding,
+    private val lifecycleOwner: LifecycleOwner
+) : RecyclerView.ViewHolder(binding.root) {
+    fun bind(jokeItem: JokeItem) {
         binding.executeAfter {
             lifecycleOwner = this@JokeVH.lifecycleOwner
             mtvJoke.text = jokeItem.joke
@@ -39,9 +43,9 @@ class JokeVH(private val binding:ItemJokesBinding,
     }
 }
 
-object JokeItemDiffUtils: DiffUtil.ItemCallback<JokeItem>(){
+object JokeItemDiffUtils : DiffUtil.ItemCallback<JokeItem>() {
     override fun areItemsTheSame(oldItem: JokeItem, newItem: JokeItem): Boolean {
-        return oldItem == newItem
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: JokeItem, newItem: JokeItem): Boolean {
@@ -52,9 +56,20 @@ object JokeItemDiffUtils: DiffUtil.ItemCallback<JokeItem>(){
 }
 
 data class JokeItem(
-    var joke:String,
-    var time:String
-)
+    var id: Long,
+    var joke: String,
+    var time: String
+) {
+    companion object {
+        fun mapToJokeItem(joke: Joke): JokeItem {
+            return JokeItem(
+                id = joke.id,
+                joke = joke.joke,
+                time = formatTimestamp(timestampMillis = joke.timeStamp)!!
+            )
+        }
+    }
+}
 
 inline fun <T : ViewDataBinding> T.executeAfter(block: T.() -> Unit) {
     block()

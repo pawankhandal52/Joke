@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Jokes</string>
+    <string name="top_10_jokes_of_the_day">Top 10 Jokes of the day</string>
+    <string name="to_get_the_latest_jokes_please_check_and_enable_your_internet_connection">To get the latest jokes,please check and enable your internet connection.</string>
 </resources>

@@ -9,10 +9,9 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface JokeDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(joke: Joke): Long
 
     @Query("SELECT * FROM joke ORDER BY id DESC LIMIT :limit")
-    fun getJokesOfTheDay(limit:Int): Flow<List<Joke>>
+    fun getJokesOfTheDay(limit: Int): Flow<List<Joke>>
 }

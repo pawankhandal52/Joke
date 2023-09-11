@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.unlimit.jokes.presentation.jokesscreen.viewmodel.MainActivityVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,6 +14,34 @@
         android:layout_height="match_parent"
         android:background="@color/bgColor"
         tools:context=".presentation.jokesscreen.view.MainActivity">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clErrorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"
+            android:paddingVertical="@dimen/_4dp"
+            android:paddingHorizontal="@dimen/_8dp"
+            android:background="@color/red">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvErrorTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_10dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/to_get_the_latest_jokes_please_check_and_enable_your_internet_connection"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <com.google.android.material.textview.MaterialTextView
@@ -23,22 +53,42 @@
             android:layout_marginTop="@dimen/_10dp"
             android:gravity="center"
             android:textSize="24sp"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Top 10 Jokes of the day"/>
+            app:layout_constraintTop_toBottomOf="@+id/clErrorLayout"
+            android:text="@string/top_10_jokes_of_the_day"/>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvJokesList"
+        <FrameLayout
+            android:id="@+id/flData"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_20dp"
-            android:paddingHorizontal="@dimen/_10dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mtvTitle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:listitem="@layout/item_jokes" />
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_20dp"
+                app:indicatorDirectionCircular="clockwise"
+                app:trackColor="@color/lightBlack"
+                app:indicatorColor="@color/black"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvJokesList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/_10dp"
+                android:paddingHorizontal="@dimen/_10dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_jokes" />
+
+        </FrameLayout>
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

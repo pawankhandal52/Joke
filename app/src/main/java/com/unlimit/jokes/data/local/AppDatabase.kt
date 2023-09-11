@@ -7,8 +7,8 @@ import androidx.room.RoomDatabase
 import com.unlimit.jokes.data.local.dao.JokeDao
 import com.unlimit.jokes.data.local.entity.Joke
 
-@Database(entities = [Joke::class], version = 1, exportSchema = false)
-abstract class AppDatabase :RoomDatabase(){
+@Database(entities = [Joke::class], version = 2, exportSchema = false)
+abstract class AppDatabase : RoomDatabase() {
 
     abstract fun jokeDao(): JokeDao
 
@@ -21,14 +21,13 @@ abstract class AppDatabase :RoomDatabase(){
                     context,
                     AppDatabase::class.java,
                     "joke_database"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 instance
             }
         }
 
     }
-
 
 
 }

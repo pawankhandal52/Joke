@@ -9,14 +9,14 @@ import kotlinx.coroutines.flow.flowOn
 
 class GetJokeFromApiAndStoreInDbUseCase(private val jokeRepositoryImpl: JokeRepositoryImpl) {
     private val TAG = GetJokeFromApiAndStoreInDbUseCase::class.simpleName
-     suspend fun getJokesAndSaveInDb(typeOfResponse:String){
-         jokeRepositoryImpl.fetchJokesFromApiAndStoreInToDb(typeOfResponse)
-                .flowOn(Dispatchers.IO)
-                .catch {
-                    Log.d(TAG,it.message!!)
-                }.collectLatest {
-                 Log.d(TAG,it.toString())
-             }
+    suspend fun getJokesAndSaveInDb(typeOfResponse: String) {
+        jokeRepositoryImpl.fetchJokesFromApiAndStoreInToDb(typeOfResponse)
+            .flowOn(Dispatchers.IO)
+            .catch {
+                Log.d(TAG, it.message!!)
+            }.collectLatest {
+                Log.d(TAG, it.toString())
+            }
 
     }
 }

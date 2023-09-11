@@ -4,5 +4,5 @@ import com.unlimit.jokes.data.remote.model.JokeApiNetworkResponse
 import kotlinx.coroutines.flow.Flow
 
 interface ApiHelper {
-    fun getJoke(typeOfResponse:String): Flow<JokeApiNetworkResponse>
+    fun getJoke(typeOfResponse: String): Flow<JokeApiNetworkResponse>
 }
