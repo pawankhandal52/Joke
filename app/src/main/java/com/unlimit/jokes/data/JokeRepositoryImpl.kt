@@ -27,8 +27,6 @@ class JokeRepositoryImpl(
 
     }
 
-    override suspend fun saveDatainDb(joke: Joke) {
-        jokeHelper.insertJoke(joke)
-    }
+
 
 }

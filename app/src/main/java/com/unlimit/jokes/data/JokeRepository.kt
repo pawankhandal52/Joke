@@ -9,6 +9,5 @@ interface JokeRepository {
 
     fun fetchJokesFromApiAndStoreInToDb(typeOfResponse: String): Flow<Long>
 
-    suspend fun saveDatainDb(joke: Joke)
 
 }
