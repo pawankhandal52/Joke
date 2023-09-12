@@ -2,7 +2,6 @@ package com.unlimit.jokes.domain
 
 import android.util.Log
 import com.unlimit.jokes.data.JokeRepository
-import com.unlimit.jokes.data.JokeRepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest

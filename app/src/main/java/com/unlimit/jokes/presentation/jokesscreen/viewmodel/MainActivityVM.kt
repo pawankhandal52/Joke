@@ -1,6 +1,5 @@
 package com.unlimit.jokes.presentation.jokesscreen.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.unlimit.jokes.domain.GetJokeFromApiAndStoreInDbUseCase

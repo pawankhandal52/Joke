@@ -25,14 +25,13 @@ object RetrofitBuilder {
             .build()
     }
 
-    val apiService: ApiService = getRetrofit().create(ApiService::class.java)
-
-
     private fun getBuilder(): OkHttpClient.Builder {
         return OkHttpClient.Builder()
             .connectTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
     }
+
+    val apiService: ApiService = getRetrofit().create(ApiService::class.java)
 
 }

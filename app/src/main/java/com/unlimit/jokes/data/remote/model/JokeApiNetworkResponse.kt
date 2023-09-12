@@ -6,6 +6,6 @@ import com.google.gson.annotations.SerializedName
 @Keep
 data class JokeApiNetworkResponse(
 
-	@field:SerializedName("joke")
-	val joke: String
+    @field:SerializedName("joke")
+    val joke: String
 )

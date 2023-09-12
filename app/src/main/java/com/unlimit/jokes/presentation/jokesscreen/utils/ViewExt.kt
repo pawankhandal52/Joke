@@ -10,13 +10,6 @@ fun View.toVisible() {
 }
 
 /**
- * Make the view invisible
- */
-fun View.toInvisible() {
-    visibility = View.INVISIBLE
-}
-
-/**
  * Make the view gone
  */
 fun View.toGone() {

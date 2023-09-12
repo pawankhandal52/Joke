@@ -11,13 +11,15 @@ import com.unlimit.jokes.koin.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class Joke:Application() {
+class Joke : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
             androidContext(this@Joke)
-            modules(databaseModule, viewModelModule,useCaseModule,
-                jokeRepositoryImplModule,jokeHelperModule,apiHelperModule,retrofitModule)
+            modules(
+                databaseModule, viewModelModule, useCaseModule,
+                jokeRepositoryImplModule, jokeHelperModule, apiHelperModule, retrofitModule
+            )
         }
     }
 }
