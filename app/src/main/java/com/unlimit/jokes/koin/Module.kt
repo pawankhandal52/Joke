@@ -1,5 +1,6 @@
 package com.unlimit.jokes.koin
 
+import com.unlimit.jokes.data.JokeRepository
 import com.unlimit.jokes.data.JokeRepositoryImpl
 import com.unlimit.jokes.data.local.AppDatabase
 import com.unlimit.jokes.data.local.JokeHelper
@@ -27,7 +28,7 @@ val useCaseModule = module {
 }
 
 val jokeRepositoryImplModule = module {
-    factory { JokeRepositoryImpl(get(), get()) }
+    factory<JokeRepository> { JokeRepositoryImpl(get(), get()) }
 
 }
 

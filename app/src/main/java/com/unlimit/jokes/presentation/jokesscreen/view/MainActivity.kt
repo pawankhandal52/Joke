@@ -27,29 +27,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val mainActivityVM: MainActivityVM by viewModel()
 
-
-    private var broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            val notConnected = intent.getBooleanExtra(
-                ConnectivityManager
-                    .EXTRA_NO_CONNECTIVITY, false
-            )
-            if (notConnected) {
-                disconnected()
-            } else {
-                connected()
-            }
-        }
-    }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         setupRecyclerView()
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 mainActivityVM.uiState.collectLatest {
                     when (it) {
                         is MainActivityVM.State.Error -> {
@@ -77,15 +61,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun disconnected() {
-        binding.clErrorLayout.toVisible()
-    }
 
-    private fun connected() {
-        binding.clErrorLayout.toGone()
-        mainActivityVM.startPeriodicDataFetching()
+    private fun setupRecyclerView() {
+        val jokeListAdapter = JokeListAdapter(this@MainActivity)
+        with(binding.rvJokesList) {
+            adapter = jokeListAdapter
+        }
     }
-
 
     override fun onStart() {
         super.onStart()
@@ -100,10 +82,30 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun setupRecyclerView() {
-        val jokeListAdapter = JokeListAdapter(this@MainActivity)
-        with(binding.rvJokesList) {
-            adapter = jokeListAdapter
+    private var broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val notConnected = intent.getBooleanExtra(
+                ConnectivityManager
+                    .EXTRA_NO_CONNECTIVITY, false
+            )
+            if (notConnected) {
+                disconnected()
+            } else {
+                connected()
+            }
+        }
+    }
+
+    private fun disconnected() {
+        binding.clErrorLayout.toVisible()
+    }
+
+    private fun connected() {
+        binding.clErrorLayout.toGone()
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mainActivityVM.startPeriodicDataFetching()
+            }
         }
     }
 
